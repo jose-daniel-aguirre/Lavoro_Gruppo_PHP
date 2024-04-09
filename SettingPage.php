@@ -27,7 +27,8 @@
     <input type="number" id="quantity" name="quantity" min="1"><br><br>
     <label for="player">Player Numbers: </label>
     <input type="number" id="player" name="player" min="2" max="4"><br><br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit"><br><br><br>
+    <input type="button" value="Torna indietro" onclick="history.back(-1)" />
 </form>
 </body>
 </html>

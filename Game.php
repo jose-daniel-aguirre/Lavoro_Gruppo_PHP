@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>HANGMAN GAME!!!!</h1><br>
-    <img src="Resources/hang1.jpg" id="img"><br>
+    <img class="hang" src="Resources/hang1.jpg" id="img"><br>
     <?php
     session_start();
     $x =1;
@@ -49,7 +49,8 @@
     
     <input type="text" maxlength="1" id="Lettera" onkeydown="return /[a-z]/i.test(event.key)"><br><br>
     <input type="text" id="Parola" onkeydown="return /[a-z]/i.test(event.key)"><br><br>
-    <button>Confirm</button>
-    
+    <button>
+    <span class="button_top"> Confirm</span>
+    </button>
 </body>
 </html>
