@@ -10,8 +10,23 @@
     <h1>HANGMAN GAME!!!!</h1><br>
     <img src="Resources/hang1.jpg" id="img"><br>
     <?php
+    session_start();
+    $x =1;
+    $filename ="Settings.txt";
+    $handler = fopen($filename,"r") or die("unable to open file!");
+    while (!feof($handler)) {
+        if ($x == 1)
+        {
+            $_SESSION["Quantity"] = fgets($handler);
+            $x++;
+        }
+        else 
+        {
+            $_SESSION["Players"] = fgets($handler);
+        }
+    }
+    fclose($handler);
     $words = [];
-    $
     $word;
     $wordlength;
     $index = 0;
@@ -28,10 +43,13 @@
     $wordlength = strlen($word) -2;
 
     echo "<h2>Length: ". $wordlength. "</h2>";
+    echo $_SESSION["Players"] . $_SESSION["Quantity"] ;
+
     ?>
     
     <input type="text" maxlength="1" id="Lettera" onkeydown="return /[a-z]/i.test(event.key)"><br><br>
     <input type="text" id="Parola" onkeydown="return /[a-z]/i.test(event.key)"><br><br>
     <button>Confirm</button>
+    
 </body>
 </html>
