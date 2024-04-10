@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="Styling.css">
     <title>Document</title>
 </head>
-<body>
+<body class="game">
     <?php
     $Round = 1;
     $Player = 2;
@@ -28,7 +28,8 @@
     <label for="player">Player Numbers: </label>
     <input type="number" id="player" name="player" min="2" max="4"><br><br>
     <input type="submit" value="Submit"><br><br><br>
-    <input type="button" value="Torna indietro" onclick="history.back(-1)" />
+    <input type="button" value="Torna indietro" onclick="history.back(-100)" />  
+
 </form>
 </body>
 </html>
