@@ -35,7 +35,6 @@
     }
     fclose($handler);
     //variabili sessione
-    $_SESSION["round"] = 1;
     $_SESSION["Punti"] = $Punti= [];
     
 
@@ -47,7 +46,7 @@
 
     
     if ($_SESSION["incorso"] == false)
-    {// semplicemente pick
+    {
 
         $filename = "Paniere.txt";
         $handler = fopen($filename,"r") or die("unable to open file!");
@@ -60,9 +59,10 @@
     $_SESSION["Parola"] = $words[$_SESSION["Random"]];
     $_SESSION["Lunghezza"] = strlen($_SESSION["Parola"] )-2;
     $_SESSION["wordS"] = str_split($_SESSION["Parola"]) ;
-    $_SESSION["incorso"] = true ;
     $_SESSION["ParolaGiocatori"] =[];
-    $_SESSION["LettereSbagliate"] = []; 
+    $_SESSION["LettereSbagliate"] = ""; 
+    $_SESSION["round"] ++;
+    $_SESSION["incorso"] = true ;
     }
     else 
     {
@@ -75,11 +75,11 @@
             $Lettera = $_POST["Lettera"];
             for ($j = 0; $j < $_SESSION["Lunghezza"]; $j++) //controllo
             {
-                if($_SESSION["wordS[$j]"] = $Lettera) // Problema
+                if($_SESSION["wordS"][$j] === $Lettera) // Problema
                 {
                     debug_to_console("ti trovi nel if della lettera");
                    $Trovato  = true;
-                   $_SESSION["ParolaGiocatori[$j]"] = $_SESSION["wordS[$j]"];
+                   $_SESSION["ParolaGiocatori"][$j] = $_SESSION["wordS"][$j];
                 }
                 else 
                 {
@@ -93,13 +93,15 @@
             }
             else
             {
-                array_push($_SESSION["LettereSbagliate"], $Lettera);
+                $_SESSION["LettereSbagliate"] = $Lettera + $_SESSION["LettereSbagliate"]; // Fatal error: Uncaught TypeError: Unsupported operand types: array + string in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php:97 Stack trace: #0 {main} thrown in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php on line 97
                 $_SESSION["Immagine"]++;
+                var_dump ($_SESSION["LettereSbagliate"]);
             }
         }
-        print_r ($_SESSION["ParolaGiocatori"]);
-        print_r ($_SESSION["wordS"]);
-        print_r ($_SESSION["LettereSbagliate"]);
+        //print_r ($_SESSION["ParolaGiocatori"]);
+        //print_r ($_SESSION["LettereSbagliate"]);
+        var_dump ($_SESSION["wordS"]);
+        echo "<h3>Lettere sbagliate : ". $_SESSION["LettereSbagliate"] . "</h3>"; 
     ?>
     <img src="<?php echo $_SESSION["Immagine"]; ?>.jpg"><br>
     <form action="Game.php" method="post">
