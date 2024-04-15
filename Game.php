@@ -37,13 +37,13 @@
     //variabili sessione
     $_SESSION["round"] = 1;
     $_SESSION["Punti"] = $Punti= [];
-    $_SESSION["Immagine"] = 1;
-    $_SESSION["incorso"] = false;
+    
 
     echo "<h2>Round: ". $_SESSION["round"] . "</h2>";
-    $Fine=false;
+    $Fine=false;  
     $words = [];
     $index = 0;
+    $Trovato = false;
 
     
     if ($_SESSION["incorso"] == false)
@@ -61,6 +61,8 @@
     $_SESSION["Lunghezza"] = strlen($_SESSION["Parola"] )-2;
     $_SESSION["wordS"] = str_split($_SESSION["Parola"]) ;
     $_SESSION["incorso"] = true ;
+    $_SESSION["ParolaGiocatori"] =[];
+    $_SESSION["LettereSbagliate"] = []; 
     }
     else 
     {
@@ -73,16 +75,31 @@
             $Lettera = $_POST["Lettera"];
             for ($j = 0; $j < $_SESSION["Lunghezza"]; $j++) //controllo
             {
-                if($_SESSION["wordS[$j]"] = $Lettera)
+                if($_SESSION["wordS[$j]"] = $Lettera) // Problema
                 {
-                    
+                    debug_to_console("ti trovi nel if della lettera");
+                   $Trovato  = true;
+                   $_SESSION["ParolaGiocatori[$j]"] = $_SESSION["wordS[$j]"];
                 }
                 else 
                 {
-                    $_SESSION["Immagine"]++;
+                    debug_to_console("ti trovi nel else della lettera");
+                    $Trovato = false;
                 }
             }
+            if ($Trovato == true)
+            {
+                 debug_to_console("stai nel if di trovato  ");
+            }
+            else
+            {
+                array_push($_SESSION["LettereSbagliate"], $Lettera);
+                $_SESSION["Immagine"]++;
+            }
         }
+        print_r ($_SESSION["ParolaGiocatori"]);
+        print_r ($_SESSION["wordS"]);
+        print_r ($_SESSION["LettereSbagliate"]);
     ?>
     <img src="<?php echo $_SESSION["Immagine"]; ?>.jpg"><br>
     <form action="Game.php" method="post">
