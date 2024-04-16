@@ -7,6 +7,16 @@
     <title>Document</title>
 </head>
 <body class="game">
+<?php
+session_start();
+$_SESSION["incorso"] = false;
+$_SESSION["Immagine"] = 2;
+$_SESSION["round"] = 1;
+$_SESSION["TurnoG"] = 1;
+$_SESSION["giocatore"] = 0;
+$_SESSION["Giuste"] = 0;
+$_SESSION["Punti"] = [0,0,0,0];
+?>
     <div class="zoom">
     <img src="Resources/HangmanTitle.png"><br><br>
     </div>

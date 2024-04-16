@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="Styling.css">
     <title>Document</title>
 </head>
-<body class="game">
+<body>
     <h1>REGOLE</h1><br><br>
     <p>Il gioco dell'impiccato è un gioco di parole in cui un giocatore deve indovinare una parola segreta indovinando le lettere che la compongono.</p><br>
     <p>puoi provare a indovinare una singola lettera o provare a indovinare tutta la parola, ogni giocatore ha un solo tentativo.</p><br>

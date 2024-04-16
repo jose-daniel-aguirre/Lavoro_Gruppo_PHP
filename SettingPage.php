@@ -21,7 +21,7 @@
     }
     fclose($handler);
     ?>
-    <h1>SETTINGS!!!</h1><br><br>
+    <h1>SETTINGS</h1><br><br>
     <form action="SettingPage.php" method="post">
     <label for="quantity">Round Quantity: </label>
     <input type="number" id="quantity" name="quantity" min="1"><br><br>

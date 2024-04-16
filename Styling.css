@@ -54,9 +54,4 @@ button:hover .button_top {
 button:active .button_top {
     transform: translateY(0);
 }
-.playerlist{
-    text-align: left;
-    font-weight: bold;
-    background: rgba(#ffffff, .6);
-}
   
