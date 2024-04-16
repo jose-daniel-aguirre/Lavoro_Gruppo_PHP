@@ -72,7 +72,22 @@
     echo "<h3>Length: ". $_SESSION["Lunghezza"]. "</h3>"; // lunghezza parola
         if ($_SERVER["REQUEST_METHOD"] == "POST") 
         {
+
+            $Parola = $_POST["Parola"];
             $Lettera = $_POST["Lettera"];
+            if (strlen($Parola) > 0)
+            {
+                $ParolaARR = str_split($Parola);
+                for ($i=0;$i < strlen($Parola);i++)
+                {
+                if ($ParolaARR = $_SESSION["wordS"])
+                {
+                    
+                }
+                }
+            }
+            else
+            {
             for ($j = 0; $j < $_SESSION["Lunghezza"]; $j++) //controllo
             {
                 if($_SESSION["wordS"][$j] === $Lettera) // Problema
@@ -84,7 +99,6 @@
                 else 
                 {
                     debug_to_console("ti trovi nel else della lettera");
-                    $Trovato = false;
                 }
             }
             if ($Trovato == true)
@@ -93,20 +107,29 @@
             }
             else
             {
-                $_SESSION["LettereSbagliate"] = $Lettera + $_SESSION["LettereSbagliate"]; // Fatal error: Uncaught TypeError: Unsupported operand types: array + string in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php:97 Stack trace: #0 {main} thrown in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php on line 97
+                $_SESSION["LettereSbagliate"] =$_SESSION["LettereSbagliate"] . $Lettera ; // Fatal error: Uncaught TypeError: Unsupported operand types: string + string in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php:97 Stack trace: #0 {main} thrown in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php on line 97
                 $_SESSION["Immagine"]++;
-                var_dump ($_SESSION["LettereSbagliate"]);
+            }
             }
         }
         //print_r ($_SESSION["ParolaGiocatori"]);
         //print_r ($_SESSION["LettereSbagliate"]);
-        var_dump ($_SESSION["wordS"]);
+        //var_dump ($_SESSION["wordS"]);
+
+        echo "<h3>Parola : </h3>";
+        for ($i =0;$i < $_SESSION ["Lunghezza"] ; $i++)
+        {
+            error_reporting(E_ERROR | E_PARSE);
+            echo $i + 1 . ")";
+            echo $_SESSION["ParolaGiocatori"][$i];
+            error_reporting(E_ERROR | E_PARSE);
+        }
         echo "<h3>Lettere sbagliate : ". $_SESSION["LettereSbagliate"] . "</h3>"; 
     ?>
     <img src="<?php echo $_SESSION["Immagine"]; ?>.jpg"><br>
     <form action="Game.php" method="post">
     <input type="text" maxlength="1" id="Lettera" name="Lettera" onkeydown="return /[a-z]/i.test(event.key)" ><br><br>
-    <!--<input type="text" id="Letter" onkeydown="return /[a-z]/i.test(event.key)" ><br><br> -->
+    <input type="text" id="Parola" name="Parola" onkeydown="return /[a-z]/i.test(event.key)" ><br><br> 
     <input type="submit" value="Conferma">
 </body>
 </html>
