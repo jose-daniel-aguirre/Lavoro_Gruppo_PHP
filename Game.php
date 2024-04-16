@@ -61,7 +61,6 @@
     $_SESSION["wordS"] = str_split($_SESSION["Parola"]) ;
     $_SESSION["ParolaGiocatori"] =[];
     $_SESSION["LettereSbagliate"] = ""; 
-    $_SESSION["round"] ++;
     $_SESSION["incorso"] = true ;
     }
     else 
@@ -73,17 +72,19 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") 
         {
 
-            $Parola = $_POST["Parola"];
             $Lettera = $_POST["Lettera"];
-            if (strlen($Parola) > 0)
+            if (strlen($Lettera) > 1)
             {
-                $ParolaARR = str_split($Parola);
-                for ($i=0;$i < strlen($Parola);i++)
+                if ( $Lettera == $_SESSION["Parola"])
                 {
-                if ($ParolaARR = $_SESSION["wordS"])
-                {
+                    $_SESSION["incorso"] = false;
+                    $_SESSION["round"]++;
                     
                 }
+                else 
+                {
+                    $_SESSION["Immagine"]++;
+                    $_SESSION["LettereSbagliate"] = $_SESSION["LettereSbagliate"] . $Lettera . "  " ; // Fatal error: Uncaught TypeError: Unsupported operand types: string + string in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php:97 Stack trace: #0 {main} thrown in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php on line 97
                 }
             }
             else
@@ -107,11 +108,16 @@
             }
             else
             {
-                $_SESSION["LettereSbagliate"] =$_SESSION["LettereSbagliate"] . $Lettera ; // Fatal error: Uncaught TypeError: Unsupported operand types: string + string in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php:97 Stack trace: #0 {main} thrown in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php on line 97
+                $_SESSION["LettereSbagliate"] =$_SESSION["LettereSbagliate"] . $Lettera . "  " ; // Fatal error: Uncaught TypeError: Unsupported operand types: string + string in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php:97 Stack trace: #0 {main} thrown in C:\xampp\htdocs\Lavoro_Gruppo_PHP-main\Game.php on line 97
                 $_SESSION["Immagine"]++;
             }
             }
+            if ( $_SESSION["round"] == $_SESSION["Quantity"])
+                    {
+                    header('Location: FianlResults.php');
+                    }
         }
+        
         //print_r ($_SESSION["ParolaGiocatori"]);
         //print_r ($_SESSION["LettereSbagliate"]);
         //var_dump ($_SESSION["wordS"]);
@@ -128,8 +134,8 @@
     ?>
     <img src="<?php echo $_SESSION["Immagine"]; ?>.jpg"><br>
     <form action="Game.php" method="post">
-    <input type="text" maxlength="1" id="Lettera" name="Lettera" onkeydown="return /[a-z]/i.test(event.key)" ><br><br>
-    <input type="text" id="Parola" name="Parola" onkeydown="return /[a-z]/i.test(event.key)" ><br><br> 
+    <input type="text" id="Lettera" name="Lettera" onkeydown="return /[a-z]/i.test(event.key)" ><br><br>
+    <!--<input type="text" id="ParolaF" name="ParolaF" onkeydown="return /[a-z]/i.test(event.key)" ><br><br> -->
     <input type="submit" value="Conferma">
 </body>
 </html>
