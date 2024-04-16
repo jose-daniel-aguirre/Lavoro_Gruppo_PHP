@@ -9,23 +9,13 @@
 <body>
     <h1>HANGMAN GAME </h1>
     <?php
-    // funzione per il consol.log . da cancellare
-    function debug_to_console($data) {
-        $output = $data;
-        if (is_array($output))
-            $output = implode(',', $output);
-    
-        echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-    }
     function GG()
     {
         $_SESSION["round"]++;
                     $_SESSION["incorso"] = false;
                     $_SESSION["Immagine"] = 1;
                     $_SESSION["Punti"][$_SESSION["giocatore"]]--;
-                    debug_to_console("sei nel prossimo round");
     }
-
     session_start();
     $Lettera ;
     $x =1;
@@ -43,7 +33,6 @@
         }
     }
     fclose($handler);
-    //variabili sessione
 
     
     echo "<h2>Round: ". $_SESSION["round"] . "</h2>";
@@ -71,12 +60,11 @@
     $_SESSION["LettereSbagliate"] = ""; 
     $_SESSION["incorso"] = true ;
     $_SESSION["Immagine"]--;
-    debug_to_console ("stai nella generazione della parola");
     }
     else 
     {
+        // non serve ma nel dubbio lo teniamo che porebbe esplodere 
     }
-    echo $_SESSION["Parola"];
     echo "<h3>Length: ". $_SESSION["Lunghezza"]. "</h3>"; // lunghezza parola
         if ($_SERVER["REQUEST_METHOD"] == "POST") 
         {
@@ -100,22 +88,18 @@
             {
             for ($j = 0; $j < $_SESSION["Lunghezza"]; $j++) //controllo
             {
-                if($_SESSION["wordS"][$j] === $Lettera) // Problema
+                if($_SESSION["wordS"][$j] === $Lettera) 
                 {
-
-                    debug_to_console("ti trovi nel if della lettera");
                    $Trovato  = true;
                    $_SESSION["ParolaGiocatori"][$j] = $_SESSION["wordS"][$j];
                    $_SESSION["Giuste"]++;
                 }
                 else 
                 {
-                    debug_to_console("ti trovi nel else della lettera");
                 }
             }
             if ($Trovato == true)
             {
-                 debug_to_console("stai nel if di trovato  ");
             }
             else
             {
@@ -149,9 +133,6 @@
                     {
                     header('Location: FinalResults.php');
                     }
-
-
-                    debug_to_console($_SESSION["giocatore"]);
         echo "<h3>Parola : </h3>";
         for ($i =0;$i < $_SESSION ["Lunghezza"] ; $i++) // funziona da dio
         {
@@ -161,12 +142,10 @@
             error_reporting(E_ERROR | E_PARSE);
         }
         echo "<h3>Sbagliate : ". $_SESSION["LettereSbagliate"] . "</h3>"; 
-        print_r($_SESSION["Punti"]);
     ?>
     <img src="<?php echo $_SESSION["Immagine"]; ?>.jpg"><br>
     <form action="Game.php" method="post">
     <input type="text" id="Lettera" name="Lettera" onkeydown="return /[a-z]/i.test(event.key)" ><br><br>
-    <!--<input type="text" id="ParolaF" name="ParolaF" onkeydown="return /[a-z]/i.test(event.key)" ><br><br> -->
     <input type="submit" value="Conferma">
 </body>
 </html>
