@@ -28,7 +28,8 @@
     <label for="player">Player Numbers: </label>
     <input type="number" id="player" name="player" min="2" max="4"><br><br>
     <input type="submit" value="Submit"><br><br><br>
-    <input type="button" value="Torna indietro" onclick="history.back(-100)" />  
+    <!-- <input type="button" value="Torna indietro" onclick="history.back(-100)" />   -->
+    <a href="TitleScreen.php">Indietro</a>
 
 </form>
 </body>
